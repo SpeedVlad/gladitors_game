@@ -3,6 +3,7 @@ package org.example;
 public class Monster {
     public int hp;
     public int attack;
+    public static String[] monsterNames = {"Гоблін", "Троль", "Орк", "Дракон"};
     public String name;
 
     public Monster(int hp, int attack, String name) {
