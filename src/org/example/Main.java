@@ -13,7 +13,8 @@ abstract class Main {
     private static int monsterDamage;
     private static int monsterhp;
     private static int starthp;
-    private static int gladHp;
+    private static int gladHp2;
+    private static int gladHp1;
     private static int gladHp_;
 
 
@@ -229,8 +230,8 @@ abstract class Main {
         Scanner scanner = new Scanner(System.in);
         Random random = new Random();
         int giveXP = (int) Math.sqrt(monster.getAttack() * monster.getHp());
-        gladHp = (gladiator.getBasicHp() + gladiator.getConstitution()) * 5;
-        while (monster.getHp() > 0 && gladHp > 0) {
+        gladHp1 = (gladiator.getBasicHp() + gladiator.getConstitution()) * 5;
+        while (monster.getHp() > 0 && gladHp1 > 0) {
             System.out.println(" ");
             System.out.print("1. атакувати\n2. блок\n3. атака вампіра\nТвоя дія: ");
             int choice = scanner.nextInt();
@@ -256,7 +257,7 @@ abstract class Main {
                     System.out.println(" ");
                     System.out.println("Ти виграв. ти маєш " + giveXP + " довіду. І ти відхилився на"+ monsterhp / 5 +"ХП");
                     gladiator.setXp(gladiator.getXp() + giveXP);
-                    gladHp = ((gladHp + monsterhp) / 5);
+                    gladHp1 = ((gladHp1 + monsterhp) / 5);
                     levelUp(gladiator);
                     return;
                 }
@@ -280,15 +281,15 @@ abstract class Main {
                 }
                 monster.setHp(monster.getHp() - attack / 7);
                 System.out.println(" ");
-                System.out.println("Ти наніс"+ attack / 7 +"урон(а) ворогу. І відхилився на "+ attack / 4 * gladiator.getLifesteal() +"ХП");
+                System.out.println("Ти наніс"+ attack / 7 +"урон(а) ворогу. І відхилився на "+ ((gladHp1 + attack) / 4 * gladiator.getLifesteal()) +"ХП");
                 System.out.println(" ");
-                gladHp = ((gladHp + attack) / 4 * gladiator.getLifesteal());
+                gladHp1 = ((gladHp1 + attack) / 4 * gladiator.getLifesteal());
                 if (monster.getHp() <= 0) {
                     monster.setHp(0);
                     System.out.println(" ");
                     System.out.println("Ти виграв. ти маєш " + giveXP + " довіду. І ти відхилився на"+ monsterhp / 5 +"ХП");
                     gladiator.setXp(gladiator.getXp() + giveXP);
-                    gladHp = ((gladHp + monsterhp) / 5);
+                    gladHp1 = ((gladHp1 + monsterhp) / 5);
                     levelUp(gladiator);
                     return;
                 }
@@ -299,14 +300,14 @@ abstract class Main {
         }
         public static void enemyattack(Monster monster, Gladiator gladiator) {
             if (gladHp_ == 0){
-                gladHp = (gladiator.getBasicHp() + gladiator.getConstitution()) * 5;
+                gladHp2 = (gladiator.getBasicHp() + gladiator.getConstitution()) * 5;
             }
             gladHp_ = 1;
             if (gladiator.isHaveShield()) {
                 monsterDamage = monster.getAttack() / 2;
             }
-            gladHp -= monsterDamage;
-            gladiator.setBasicHp(gladHp);
+            gladHp2 -= monsterDamage;
+            gladiator.setBasicHp(gladHp2);
             gladiator.setBasicHp(gladiator.getBasicHp() - monsterDamage);
             System.out.println(" ");
             System.out.println(monster.getName() + " наніс " + monsterDamage + " урона по тобі.");
@@ -320,7 +321,7 @@ abstract class Main {
                 }
             else {
                 System.out.println(" ");
-                System.out.println("Твій ХП: " + gladHp);
+                System.out.println("Твій ХП: " + gladHp2);
                 System.out.println("Ворожий ХП: " + monster.getHp());
                 System.out.println(" ");
                 fight(monster, gladiator);
