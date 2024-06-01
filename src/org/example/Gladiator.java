@@ -3,6 +3,7 @@ package org.example;
 import java.io.*;
 
 public class Gladiator {
+    public int lifesteal;
     public int constitution;
     public int strength;
     public int xp;
@@ -13,15 +14,15 @@ public class Gladiator {
     public int basicHp;
     public boolean haveShield;
     public int critChance;
-    public int lifesteal;
 
     public Gladiator(
+            int lifesteal,
             int constitution, int strength,
             int xp, int dexterity,
             int level, int charisma,
             int basicAttack, int basicHp,
-            int i, boolean haveShield,
-            int parseInt) {
+            boolean haveShield,
+            int critChance) {
         this.constitution = constitution;
         this.strength = strength;
         this.xp = xp;
